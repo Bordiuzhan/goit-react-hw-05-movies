@@ -1,8 +1,10 @@
-import { Home } from 'pages/Home';
+import { Home } from 'components/AppBar/Home';
 import { Outlet, Route, Routes } from 'react-router-dom';
+import { Cast } from './ItemDetails/Cast';
 import { ItemDetails } from './ItemDetails/ItemDetails';
+import { Reviews } from './ItemDetails/Reviews';
 import { Layout } from './Layout/Layout';
-import { Movies } from './Movies/Movies';
+import { Movies } from './MoviesPage/Movies';
 
 export const App = () => {
   return (
@@ -10,8 +12,10 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="movies" element={<Movies />}>
-            <Route path=":id" element={<ItemDetails />}></Route>
+          <Route path="movies" element={<Movies />} />
+          <Route path="movies/:id" element={<ItemDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>

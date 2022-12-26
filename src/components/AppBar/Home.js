@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { APItrending } from '../API';
+import { APItrending } from '../../API';
 
 export const Home = () => {
   const [items, setItems] = useState([]);
@@ -9,9 +9,6 @@ export const Home = () => {
 
   useEffect(() => {
     async function fetchTrending() {
-      console.log(items.length);
-      console.log(items);
-
       if (items.length) {
         return;
       }
@@ -19,7 +16,6 @@ export const Home = () => {
         setIsLoading(true);
         const response = await APItrending();
         setItems(response.data.results);
-        console.log(items);
       } catch (error) {
         setError(true);
       } finally {
@@ -35,7 +31,9 @@ export const Home = () => {
       <ul>
         {items.map(item => (
           <li key={item.id}>
-            <Link>{item.title ? item.title : item.name}</Link>
+            <Link to={`/movies/${item.id}`}>
+              {item.title ? item.title : item.name}
+            </Link>
           </li>
         ))}
       </ul>
