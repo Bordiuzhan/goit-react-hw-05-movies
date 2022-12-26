@@ -1,6 +1,6 @@
 import { APIbyId } from 'API';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import posterNotFound from '../../img/posterNotFound.jpg';
 
 const BASE_POSTER_URL = 'https://image.tmdb.org/t/p/w500/';
@@ -8,6 +8,8 @@ const BASE_POSTER_URL = 'https://image.tmdb.org/t/p/w500/';
 export const ItemDetails = () => {
   const { id } = useParams();
   const [movieData, setMovieData] = useState(null);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
 
   useEffect(() => {
     async function fetchById() {
@@ -25,6 +27,7 @@ export const ItemDetails = () => {
     <>
       {movieData && (
         <main>
+          <Link to={backLinkHref}>Back to movies</Link>
           <img
             src={
               movieData.poster_path

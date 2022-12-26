@@ -1,9 +1,10 @@
 import { APIsearch, APItrending } from 'API';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 export const MoviesList = ({ movieName }) => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     if (movieName === '') {
@@ -29,7 +30,9 @@ export const MoviesList = ({ movieName }) => {
             console.log();
             return (
               <li key={id}>
-                <Link to={`${id}`}>{original_title}</Link>
+                <Link to={`${id}`} state={{ from: location }}>
+                  {original_title}
+                </Link>
               </li>
             );
           })}
