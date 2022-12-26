@@ -12,7 +12,6 @@ export default function Reviews() {
       try {
         const response = await APIreviews(id);
         setReviews(response.data.results);
-        console.log(response.data.results);
       } catch (error) {
         toast.error('Error happened!!!');
       }
@@ -22,7 +21,7 @@ export default function Reviews() {
 
   return (
     <>
-      {reviews.length === 0 && <p>Has no reviews!!!</p>}
+      {reviews.length === 0 && <p>We dont have any reviews for this movie</p>}
       {reviews && (
         <ul>
           {reviews.map(({ id, author, content }) => {

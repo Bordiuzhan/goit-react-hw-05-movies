@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 import { APItrending } from '../../API';
+import { Item, Link } from './Home.styled';
 
 export default function Home() {
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function Home() {
         const response = await APItrending();
         setItems(response.data.results);
       } catch (error) {
-        setError(true);
+        toast.error('Error happened!!!');
       } finally {
         setIsLoading(false);
       }
@@ -32,11 +33,11 @@ export default function Home() {
       {isLoading && <RotatingLines />}
       <ul>
         {items.map(item => (
-          <li key={item.id}>
+          <Item key={item.id}>
             <Link to={`/movies/${item.id}`}>
               {item.title ? item.title : item.name}
             </Link>
-          </li>
+          </Item>
         ))}
       </ul>
     </div>

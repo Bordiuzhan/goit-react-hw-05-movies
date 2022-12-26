@@ -9,6 +9,10 @@ export const Link = styled(NavLink)`
   font-weight: 500;
 
   &.active {
-    color: orange;
+    color: blue;
+  }
+  :hover,
+  .navLink:focus {
+    color: lightblue;
   }
 `;

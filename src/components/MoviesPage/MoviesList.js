@@ -1,8 +1,10 @@
-import { APIsearch, APItrending } from 'API';
+import { APIsearch } from 'API';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { RotatingLines } from 'react-loader-spinner';
+import { Link } from './MoviesList.styled';
+import PropTypes from 'prop-types';
 
 export const MoviesList = ({ movieName }) => {
   const [movies, setMovies] = useState([]);
@@ -49,4 +51,8 @@ export const MoviesList = ({ movieName }) => {
       )}
     </>
   );
+};
+
+MoviesList.protoType = {
+  movieName: PropTypes.string.isRequired,
 };
