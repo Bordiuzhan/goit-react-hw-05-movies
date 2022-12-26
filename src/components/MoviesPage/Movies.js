@@ -2,7 +2,7 @@ import { MoviesList } from 'components/MoviesPage/MoviesList';
 import { useSearchParams } from 'react-router-dom';
 import { SearchBox } from './SearchBox';
 
-export const Movies = () => {
+export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query') ?? '';
 
@@ -18,4 +18,4 @@ export const Movies = () => {
       <MoviesList movieName={movieName} />
     </div>
   );
-};
+}

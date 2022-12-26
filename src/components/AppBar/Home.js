@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import { APItrending } from '../../API';
 
-export const Home = () => {
+export default function Home() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +29,7 @@ export const Home = () => {
   return (
     <div>
       <h2>Trending today</h2>
+      {isLoading && <RotatingLines />}
       <ul>
         {items.map(item => (
           <li key={item.id}>
@@ -39,4 +41,4 @@ export const Home = () => {
       </ul>
     </div>
   );
-};
+}

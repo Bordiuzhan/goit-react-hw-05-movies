@@ -1,9 +1,12 @@
 import { APIsearch, APItrending } from 'API';
+import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 
 export const MoviesList = ({ movieName }) => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -12,11 +15,13 @@ export const MoviesList = ({ movieName }) => {
     }
     async function fetchSearch() {
       try {
+        setIsLoading(true);
         const response = await APIsearch(movieName);
         setMovies(response.data.results);
-        console.log(response.data.results);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        toast.error('Error happened!!!');
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchSearch();
@@ -24,7 +29,11 @@ export const MoviesList = ({ movieName }) => {
 
   return (
     <>
-      {movies && (
+      {isLoading && <RotatingLines />}
+      {movieName !== '' && movies.length === 0 && !isLoading && (
+        <p>Nothing was found for your request</p>
+      )}
+      {movies && !isLoading && (
         <ul>
           {movies.map(({ original_title, id }) => {
             console.log();

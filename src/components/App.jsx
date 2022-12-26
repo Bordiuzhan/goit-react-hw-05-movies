@@ -1,10 +1,12 @@
-import { Home } from 'components/AppBar/Home';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import { Cast } from './ItemDetails/Cast';
-import { ItemDetails } from './ItemDetails/ItemDetails';
-import { Reviews } from './ItemDetails/Reviews';
+import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
-import { Movies } from './MoviesPage/Movies';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('components/AppBar/Home'));
+const Cast = lazy(() => import('./ItemDetails/Cast'));
+const ItemDetails = lazy(() => import('./ItemDetails/ItemDetails'));
+const Reviews = lazy(() => import('./ItemDetails/Reviews'));
+const Movies = lazy(() => import('./MoviesPage/Movies'));
 
 export const App = () => {
   return (
