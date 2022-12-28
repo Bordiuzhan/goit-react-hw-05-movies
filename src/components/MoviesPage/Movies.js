@@ -13,7 +13,7 @@ export default function Movies() {
 
   return (
     <div>
-      <SearchBox onSubmit={handlerQueryString} />
+      <SearchBox onSubmit={handlerQueryString} querySearchParams={movieName} />
 
       <MoviesList movieName={movieName} />
     </div>

@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const SearchBox = ({ onSubmit }) => {
+export const SearchBox = ({ onSubmit, querySearchParams }) => {
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    if (querySearchParams) {
+      setQuery(querySearchParams);
+    }
+  }, [querySearchParams]);
 
   const handelChange = e => {
     setQuery(e.target.value.trim());
@@ -23,4 +29,5 @@ export const SearchBox = ({ onSubmit }) => {
 
 SearchBox.protoType = {
   onSubmit: PropTypes.func.isRequired,
+  querySearchParams: PropTypes.string.isRequired,
 };

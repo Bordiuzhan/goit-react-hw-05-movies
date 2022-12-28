@@ -1,5 +1,5 @@
 import { APIbyId } from 'API';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 
 import posterNotFound from '../../img/posterNotFound.jpg';
@@ -69,16 +69,20 @@ export default function ItemDetails() {
             <p>Additional information</p>
             <ul>
               <li>
-                <Link to="cast">Cast</Link>
+                <Link to="cast" state={{ from: backLinkHref }}>
+                  Cast
+                </Link>
               </li>
               <li>
-                <Link to="reviews" data={id}>
+                <Link to="reviews" data={id} state={{ from: backLinkHref }}>
                   Reviews
                 </Link>
               </li>
             </ul>
           </WrapInfo>
-          <Outlet />
+          <Suspense>
+            <Outlet />
+          </Suspense>
         </main>
       )}
       {error && (
